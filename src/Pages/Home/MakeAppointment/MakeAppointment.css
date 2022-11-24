@@ -1,0 +1,10 @@
+.da {
+    margin: 5%;
+    border-radius: 5px;
+}
+
+.da_description {
+    margin-top: 20%;
+    margin-right: 5%;
+    /* background-image: url('../../../Images/appointment.png'); */
+}

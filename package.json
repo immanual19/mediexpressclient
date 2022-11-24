@@ -3,16 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@tanstack/react-query": "^4.16.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@windmill/react-ui": "^0.6.0",
+    "chart.js": "^4.0.1",
+    "daisyui": "^2.41.0",
+    "date-fns": "^2.29.3",
+    "firebase": "^9.14.0",
+    "flowbite": "^1.5.4",
+    "flowbite-react": "^0.3.5",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.0.1",
+    "react-day-picker": "^8.3.7",
     "react-dom": "^18.2.0",
+    "react-firebase-hooks": "^5.1.1",
+    "react-hook-form": "^7.39.5",
+    "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-toastify": "^9.1.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=4000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -34,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
   }
 }
