@@ -46,9 +46,7 @@ const SignUp = () => {
       let selectedGender=document.getElementById('selectedGender');
       let genderSlot=selectedGender.options[selectedGender.selectedIndex];
       let gender=genderSlot.value;
-      console.log(role);
-      console.log(gender);
-        if(role.length!==9 && gender.length!=11){
+        if(role.length!==9 && gender.length!==11){
         console.log(role);
         await createUserWithEmailAndPassword(data.email,data.password);
         await updateProfile({displayName:data.name});
@@ -84,7 +82,7 @@ const SignUp = () => {
       roleErrorMessage=<p className='text-red-500'><small>You must select a role</small></p>
     }
     if(genderError){
-      genderErrorMessage=<p className='text-red-500'><small>You must select a role</small></p>
+      genderErrorMessage=<p className='text-red-500'><small>You must select a Gender</small></p>
     }
     if(error || gError || updateError){
         signInError=<p className='text-red-500'><small>{error?.message || gError?.message || updateError?.message}</small></p>
