@@ -8,7 +8,6 @@ const AppointmentBanner = ({date,setDate,setSpecialist,setFilter}) => {
     let select=document.getElementById('speciality');
         let option=select.options[select.selectedIndex];		
         let key=option.value;
-        console.log(key);
         setSpecialist(key);
         setFilter(true);
     
@@ -41,7 +40,7 @@ const AppointmentBanner = ({date,setDate,setSpecialist,setFilter}) => {
 </div>
         </div>
         <div className='mt-3'>
-        <select id="speciality" onChange={update} className='btn'>
+        <select id="speciality" onChange={update} className='btn w-56'>
         <option value="option">Select Specialist</option>
         <option value="General">General</option>
         <option value="Cardiologist">Cardiologist</option>

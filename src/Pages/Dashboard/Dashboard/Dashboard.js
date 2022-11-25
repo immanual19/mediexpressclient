@@ -23,10 +23,9 @@ const Dashboard = () => {
     })
     .then(res=>res.json())
     .then(data=>{
-      console.log("data from dashboard",data);
       setUserInfo(data);
     })
-  },[])
+  },[user.email])
    const handleClick=(value)=>{
      if(value===1){
       setHome(true);

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
+import { toast } from 'react-toastify';
 const DoctorProfileUpdate = ({userInfo}) => {
     let formattedDate=[];
     const [user, loading,error]=useAuthState(auth);
@@ -13,7 +14,7 @@ const DoctorProfileUpdate = ({userInfo}) => {
     const [showSelected,setShowSelected]=useState([]);
     const [submitButton,setSubmitButton]=useState(false);
     const [imageURL,setImageURL]=useState(null);
-    const checking=()=>{
+    const getDates=()=>{
         
         let i=0;
         
@@ -28,14 +29,40 @@ const DoctorProfileUpdate = ({userInfo}) => {
 
     
     const onSubmit=async(data)=>{
+      console.log("Form is ready to deploy.");
+      let schedules=[];
+      for(let i=0;i<showSelected.length;++i){
+        let startTime=document.getElementById(`start${i}`).value;
+        let endTime=document.getElementById(`end${i}`).value;
+        let slots=document.getElementById(`slots${i}`).value;
+        schedules.push({start:startTime,end:endTime,slots:slots,day:showSelected[i]});
+      }
+        userInfo.name=user.displayName;
         userInfo.image=imageURL;
         userInfo.designation=data.designation;
         userInfo.fees=data.fees;
         userInfo.qualification=data.qualification;
         userInfo.workplace=data.workplace;
         userInfo.availabledates=showSelected;
-         console.log(userInfo);
-        
+        userInfo.schedules=schedules;
+        userInfo.speciality=data.speciality;
+        console.log(userInfo);
+        fetch('http://localhost:8080/updatedoctors',{
+          method:'POST',
+          headers:{
+            'content-type':'application/json'
+          },
+          body: JSON.stringify(userInfo)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          if(data.success){
+            toast('Congratulations!!! You are all set.');
+          }
+          else{
+            toast.error('Profile could not be updated. Please try later.');
+          }
+        })
         
     }
 
@@ -60,7 +87,7 @@ const DoctorProfileUpdate = ({userInfo}) => {
         }
         
       })
-    }
+    };
 
 
     return (
@@ -149,7 +176,7 @@ const DoctorProfileUpdate = ({userInfo}) => {
 <div className='grid grid-cols-2'>
 <div>
 
-<label for="selectDays" class="btn">Select your Available Days</label>
+<label for="selectDays" class="btn my-9">Select your Available Days</label>
 
 
 <input
@@ -157,7 +184,7 @@ const DoctorProfileUpdate = ({userInfo}) => {
 
 type="checkbox" id="selectDays" class="modal-toggle" />
 <div class="modal">
-  <div class="modal-box w-11/12 max-w-5xl">
+  <div class="modal-box w-11/12 max-w-xl">
   <DayPicker
       mode="multiple"
       min={1}
@@ -166,19 +193,29 @@ type="checkbox" id="selectDays" class="modal-toggle" />
       
     />
     <div class="modal-action">
-      <label for="selectDays" class="btn" onClick={checking}>Confirm!</label>
+      <label for="selectDays" class="btn" onClick={getDates}>Confirm!</label>
     </div>
   </div>
 </div>
 </div>
 <div>
-You have selected 
-{
-    showSelected.map(date=>{
-        return <p>{date}</p>
-        
-    })
-}
+<div class="form-control w-full max-w-xs mx-5">
+  <label class="label">
+    <span class="label-text">Speciality</span>
+    
+  </label>
+  <input
+  {...register("speciality", {
+    required:{
+        value:true,
+        message:'Please select your speciality'
+    }
+  })}
+  type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+  <label class="label">
+  {errors.speciality?.type==='required' && <span class="label-text-alt text-red-500">{errors.speciality.message}</span>}
+  </label>
+</div>
 </div>
 
 </div>
@@ -198,7 +235,7 @@ You have selected
 <p>Please select number of slots for the time (For example: 9:00 AM to 12:00 PM = 50 slots)</p>
 {
     showSelected.map((date,index)=>{
-        return <div className='my-2'><input id={`slot${index}`} type="number" placeholder={date} class="input input-bordered w-full max-w-xs"/></div>
+        return <div className='my-2'><input id={`slots${index}`} type="number" placeholder={date} class="input input-bordered w-full max-w-xs"/></div>
         
     })
 }
@@ -213,7 +250,7 @@ You have selected
   </label>
 </div>
 
-<input className='btn w-full max-w-xs' type="submit" value='Update'/>
+{submitButton &&<input className='btn w-full max-w-xs' type="submit" value='Update'/>}
 </form>
 </div>
     );

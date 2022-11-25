@@ -59,9 +59,11 @@ const BookingModal = ({date, booking, setBooking,userInfo}) => {
             <input type="text" disabled value={format(date,'PP')} class="input input-bordered w-full max-w-xs" />
             <select id="selectedSlot" class="select select-bordered w-full max-w-xs">
             <option disabled selected>Select a time slot</option>
-            {
-              slots.map((slot,index)=><option key={index} value={slot}>{slot}</option>)
-            }
+            
+             {
+              
+             }
+            
             </select>
             <input type="text" name="name" disabled value={user?.displayName} placeholder="Your name" class="input input-bordered w-full max-w-xs" />
             <input type="text" name="age" disabled value={userInfo?.age} class="input input-bordered w-full max-w-xs" />
