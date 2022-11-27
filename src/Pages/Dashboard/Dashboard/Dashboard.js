@@ -7,12 +7,15 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import AdminUpdateProfile from '../UpdateProfile/AdminUpdateProfile';
 import PatientUpdateProfile from '../UpdateProfile/PatientUpdateProfile';
 import DoctorUpdateProfile from '../UpdateProfile/DoctorProfileUpdate';
+import ConsultationPatient from '../Consultation/ConsultationPatient';
+import ConsultationDoctor from '../Consultation/ConsultationDoctor';
 const Dashboard = () => {
    const [user, loading,error]=useAuthState(auth);
    const [home,setHome]=useState(true);
    const [profile,setProfile]=useState(false);
    const [userInfo,setUserInfo]=useState(null);
    const [updateProfile,setUpdateProfile]=useState(false);
+   const [consultation,setConsultation]=useState(false);
    useEffect(()=>{
       fetch('http://localhost:8080/userinfo',{
       method: 'POST',
@@ -42,8 +45,11 @@ const Dashboard = () => {
       setProfile(false);
       setHome(false);
      }
-     else{
-
+     else if(value===4){
+      setUpdateProfile(false);
+      setProfile(false);
+      setHome(false);
+      setConsultation(true);
      }
    }
    return (
@@ -177,6 +183,12 @@ const Dashboard = () => {
 }
 {
    updateProfile && userInfo.role==='Doctor' && <DoctorUpdateProfile userInfo={userInfo}></DoctorUpdateProfile>
+}
+{
+   consultation && userInfo.role==='Patient' && <ConsultationPatient userInfo={userInfo}></ConsultationPatient>
+}
+{
+   consultation && userInfo.role==='Doctor' && <ConsultationDoctor userInfo={userInfo}></ConsultationDoctor>
 }
 </div>
    );
