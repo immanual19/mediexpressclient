@@ -5,9 +5,10 @@ import { format } from 'date-fns';
 import { setDefaultOptions } from 'date-fns/esm';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
-const BookingModal = ({date, booking, setBooking,userInfo}) => {
+const BookingModal = ({date, booking, setBooking,userInfo,doctor}) => {
   const [user, loading,error]=useAuthState(auth);
-  const { _id, name, slots } = booking;
+  const { _id, name, schedules } = booking;
+  console.log(schedules);
   const formattedDate=format(date,'PP');
   const handleCancelling=()=>{
     setBooking(null);
@@ -58,12 +59,13 @@ const BookingModal = ({date, booking, setBooking,userInfo}) => {
             <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 justify-items-center mt-2'>
             <input type="text" disabled value={format(date,'PP')} class="input input-bordered w-full max-w-xs" />
             <select id="selectedSlot" class="select select-bordered w-full max-w-xs">
-            <option disabled selected>Select a time slot</option>
-            
-             {
-              
-             }
-            
+            <option disabled selected>Select your preferred time</option>
+            {
+              schedules.map((slot, i) => <option
+                  value={slot.start}
+                  key={i}
+              >Start Time: {slot.start} End Time: {slot.end} Slots available: {slot.slots}</option>)
+          }
             </select>
             <input type="text" name="name" disabled value={user?.displayName} placeholder="Your name" class="input input-bordered w-full max-w-xs" />
             <input type="text" name="age" disabled value={userInfo?.age} class="input input-bordered w-full max-w-xs" />
