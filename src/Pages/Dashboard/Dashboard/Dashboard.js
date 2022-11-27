@@ -11,6 +11,12 @@ import ConsultationPatient from '../Consultation/ConsultationPatient';
 import ConsultationDoctor from '../Consultation/ConsultationDoctor';
 import UploadPrescriptionPatient from '../UploadPrescription/UploadPrescriptionPatient';
 import UploadPrescriptionDoctor from '../UploadPrescription/UploadPrescriptionDoctor';
+import InboxPatient from '../Inbox/InboxPatient';
+import InboxDoctor from '../Inbox/InboxDoctor';
+import PastHistory from '../PastHistory/PastHistory';
+import PatientConsultationHistory from './ConsultationHistory/PatientConsultationHistory';
+import DoctorConsultationHistory from './ConsultationHistory/DoctorConsultationHistory';
+import Complaint from '../Complaint/Complaint';
 const Dashboard = () => {
    const [user, loading,error]=useAuthState(auth);
    const [home,setHome]=useState(true);
@@ -19,6 +25,10 @@ const Dashboard = () => {
    const [updateProfile,setUpdateProfile]=useState(false);
    const [consultation,setConsultation]=useState(false);
    const [uploadPrescription,setUploadPrescription]=useState(false);
+   const [inbox,setInbox]=useState(false);
+   const [history,setHistory]=useState(false);
+   const [seeHistory,setSeeHistory]=useState(false);
+   const [complaint,setComplaint]=useState(false);
    useEffect(()=>{
       fetch('http://localhost:8080/userinfo',{
       method: 'POST',
@@ -39,6 +49,10 @@ const Dashboard = () => {
       setUpdateProfile(false);
       setConsultation(false);
       setUploadPrescription(false);
+      setInbox(false);
+      setHistory(false);
+      setSeeHistory(false);
+      setComplaint(false);
      } 
      else if(value===2){
       setProfile(true);
@@ -46,6 +60,10 @@ const Dashboard = () => {
       setUpdateProfile(false);
       setConsultation(false);
       setUploadPrescription(false);
+      setInbox(false);
+      setHistory(false);
+      setSeeHistory(false);
+      setComplaint(false);
      }
      else if(value===3){
       setUpdateProfile(true);
@@ -53,6 +71,10 @@ const Dashboard = () => {
       setHome(false);
       setConsultation(false);
       setUploadPrescription(false);
+      setInbox(false);
+      setHistory(false);
+      setSeeHistory(false);
+      setComplaint(false);
      }
      else if(value===4){
       setConsultation(true);
@@ -60,9 +82,21 @@ const Dashboard = () => {
       setProfile(false);
       setHome(false);
       setUploadPrescription(false);
+      setInbox(false);
+      setHistory(false);
+      setSeeHistory(false);
+      setComplaint(false);
      }
      else if(value===5){
-
+      setInbox(true);
+      setUploadPrescription(false);
+      setConsultation(false);
+      setUpdateProfile(false);
+      setProfile(false);
+      setHome(false);
+      setHistory(false);
+      setSeeHistory(false);
+      setComplaint(false);
      }
      else if(value===6){
       setUploadPrescription(true);
@@ -70,6 +104,43 @@ const Dashboard = () => {
       setUpdateProfile(false);
       setProfile(false);
       setHome(false);
+      setInbox(false);
+      setHistory(false);
+      setSeeHistory(false);
+      setComplaint(false);
+     }
+     else if(value===7){
+      setHistory(true);
+      setUploadPrescription(false);
+      setConsultation(false);
+      setUpdateProfile(false);
+      setProfile(false);
+      setHome(false);
+      setInbox(false);
+      setSeeHistory(false);
+      setComplaint(false);
+     }
+     else if(value===8){
+      setSeeHistory(true);
+      setHistory(false);
+      setUploadPrescription(false);
+      setConsultation(false);
+      setUpdateProfile(false);
+      setProfile(false);
+      setHome(false);
+      setInbox(false);
+      setComplaint(false);
+     }
+     else if(value===9){
+      setComplaint(true);
+      setSeeHistory(false);
+      setHistory(false);
+      setUploadPrescription(false);
+      setConsultation(false);
+      setUpdateProfile(false);
+      setProfile(false);
+      setHome(false);
+      setInbox(false);
      }
    }
    return (
@@ -142,19 +213,31 @@ const Dashboard = () => {
             <span className="flex-1 ml-3 whitespace-nowrap  text-inherit">Upload Prescription</span>
          </a>
       </li>
-      <li>
+      <li
+      onClick={()=>{
+         handleClick(7);
+      }}
+      >
          <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
             <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
             <span className="flex-1 ml-3 whitespace-nowrap  text-inherit">See Past Medical History</span>
          </a>
       </li>
-      <li>
+      <li
+      onClick={()=>{
+         handleClick(8);
+      }}
+      >
          <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
             <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clip-rule="evenodd"></path></svg>
             <span className="flex-1 ml-3 whitespace-nowrap text-inherit">History</span>
          </a>
       </li>
-      <li>
+      <li
+      onClick={()=>{
+         handleClick(9);
+      }}
+      >
          <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
             <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
             <span className="ml-3 text-inherit">Complaint</span>
@@ -216,6 +299,26 @@ const Dashboard = () => {
 }
 {
    uploadPrescription && userInfo.role==='Doctor' && <UploadPrescriptionDoctor userInfo={userInfo}></UploadPrescriptionDoctor>
+}
+{
+   inbox && userInfo.role==='Patient' && <InboxPatient userInfo={userInfo}></InboxPatient>
+}
+
+{
+   inbox && userInfo.role==='Doctor' && <InboxDoctor></InboxDoctor>
+}
+{
+   history && <PastHistory userInfo={userInfo}></PastHistory>
+}
+{
+   seeHistory && userInfo.role==='Patient' && <PatientConsultationHistory userInfo={userInfo}></PatientConsultationHistory>
+}
+{
+   seeHistory && userInfo.role==='Doctor' && <DoctorConsultationHistory userInfo={userInfo}></DoctorConsultationHistory>
+}
+
+{
+   complaint && <Complaint userInfo={userInfo}></Complaint>
 }
 
 </div>
