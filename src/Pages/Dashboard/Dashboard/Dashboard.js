@@ -9,6 +9,8 @@ import PatientUpdateProfile from '../UpdateProfile/PatientUpdateProfile';
 import DoctorUpdateProfile from '../UpdateProfile/DoctorProfileUpdate';
 import ConsultationPatient from '../Consultation/ConsultationPatient';
 import ConsultationDoctor from '../Consultation/ConsultationDoctor';
+import UploadPrescriptionPatient from '../UploadPrescription/UploadPrescriptionPatient';
+import UploadPrescriptionDoctor from '../UploadPrescription/UploadPrescriptionDoctor';
 const Dashboard = () => {
    const [user, loading,error]=useAuthState(auth);
    const [home,setHome]=useState(true);
@@ -16,6 +18,7 @@ const Dashboard = () => {
    const [userInfo,setUserInfo]=useState(null);
    const [updateProfile,setUpdateProfile]=useState(false);
    const [consultation,setConsultation]=useState(false);
+   const [uploadPrescription,setUploadPrescription]=useState(false);
    useEffect(()=>{
       fetch('http://localhost:8080/userinfo',{
       method: 'POST',
@@ -34,22 +37,39 @@ const Dashboard = () => {
       setHome(true);
       setProfile(false);
       setUpdateProfile(false);
+      setConsultation(false);
+      setUploadPrescription(false);
      } 
      else if(value===2){
       setProfile(true);
       setHome(false);
       setUpdateProfile(false);
+      setConsultation(false);
+      setUploadPrescription(false);
      }
      else if(value===3){
       setUpdateProfile(true);
       setProfile(false);
       setHome(false);
+      setConsultation(false);
+      setUploadPrescription(false);
      }
      else if(value===4){
+      setConsultation(true);
       setUpdateProfile(false);
       setProfile(false);
       setHome(false);
-      setConsultation(true);
+      setUploadPrescription(false);
+     }
+     else if(value===5){
+
+     }
+     else if(value===6){
+      setUploadPrescription(true);
+      setConsultation(false);
+      setUpdateProfile(false);
+      setProfile(false);
+      setHome(false);
      }
    }
    return (
@@ -190,6 +210,14 @@ const Dashboard = () => {
 {
    consultation && userInfo.role==='Doctor' && <ConsultationDoctor userInfo={userInfo}></ConsultationDoctor>
 }
+
+{
+   uploadPrescription && userInfo.role==='Patient' && <UploadPrescriptionPatient userInfo={userInfo}></UploadPrescriptionPatient>
+}
+{
+   uploadPrescription && userInfo.role==='Doctor' && <UploadPrescriptionDoctor userInfo={userInfo}></UploadPrescriptionDoctor>
+}
+
 </div>
    );
 };
