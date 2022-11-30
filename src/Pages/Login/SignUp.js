@@ -71,7 +71,7 @@ const SignUp = () => {
     //     console.log(gUser);
     // }
     if(user){
-        console.log("Dipa is signing up",user);
+        console.log("Someone is signing up",user);
     }
     if(loading || gLoading || updating){
 

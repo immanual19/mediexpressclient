@@ -14,8 +14,8 @@ import UploadPrescriptionDoctor from '../UploadPrescription/UploadPrescriptionDo
 import InboxPatient from '../Inbox/InboxPatient';
 import InboxDoctor from '../Inbox/InboxDoctor';
 import PastHistory from '../PastHistory/PastHistory';
-import PatientConsultationHistory from './ConsultationHistory/PatientConsultationHistory';
-import DoctorConsultationHistory from './ConsultationHistory/DoctorConsultationHistory';
+import PatientConsultationHistory from '../ConsultationHistory/PatientConsultationHistory';
+import DoctorConsultationHistory from '../ConsultationHistory/DoctorConsultationHistory';
 import Complaint from '../Complaint/Complaint';
 const Dashboard = () => {
    const [user, loading,error]=useAuthState(auth);

@@ -211,7 +211,7 @@ type="checkbox" id="selectDays" class="modal-toggle" />
         message:'Please select your speciality'
     }
   })}
-  type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+  type="text" placeholder="Ex: Cardiologist" class="input input-bordered w-full max-w-xs" />
   <label class="label">
   {errors.speciality?.type==='required' && <span class="label-text-alt text-red-500">{errors.speciality.message}</span>}
   </label>
