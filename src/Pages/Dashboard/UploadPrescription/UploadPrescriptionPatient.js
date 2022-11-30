@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 
 const UploadPrescriptionPatient = ({userInfo}) => {
@@ -9,8 +10,24 @@ const UploadPrescriptionPatient = ({userInfo}) => {
     const [imageURL,setImageURL]=useState(null);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit=async(data)=>{
-        console.log(data);
-        console.log(imageURL);
+        userInfo.reportname=data.reportname;
+        userInfo.reportimage=imageURL;
+        fetch('http://localhost:8080/pastmedicalhistory',{
+          method:'POST',
+          headers:{
+            'content-type':'application/json'
+          },
+          body:JSON.stringify(userInfo)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          if(data.success){
+            toast('Congratulations!!! Your report has been stored successfully.');
+          }
+          else{
+            toast.error('Unexpected error occured. Please, try again later.');
+          }
+        })
     }
 
 
