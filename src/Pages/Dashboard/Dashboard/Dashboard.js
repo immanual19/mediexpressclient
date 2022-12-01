@@ -441,7 +441,7 @@ const Dashboard = () => {
 }
 
 {
-   inbox && userInfo.role==='Doctor' && <InboxDoctor></InboxDoctor>
+   inbox && userInfo.role==='Doctor' && <InboxDoctor userInfo={userInfo}></InboxDoctor>
 }
 {
    history && <PastHistory userInfo={userInfo}></PastHistory>

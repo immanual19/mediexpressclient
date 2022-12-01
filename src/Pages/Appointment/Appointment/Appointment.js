@@ -21,9 +21,10 @@ const Appointment = () => {
       })
       .then(res=>res.json())
       .then(data=>{
+        console.log(data);
         setUserInfo(data);
       })
-    },[])
+    },[user.email])
     return (
         <div>
             <AppointmentBanner date={date} setDate={setDate} specialist={specialist} setSpecialist={setSpecialist} setFilter={setFilter}></AppointmentBanner>
