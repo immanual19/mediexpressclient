@@ -6,7 +6,7 @@ const AvailableAppointment = ({date,specialist,filter,userInfo}) => {
     const [doctors,setDoctors]=useState([]);
     const [booking,setBooking]=useState(null);
     const [message,setMessage]=useState(false);
-
+    const [slots,setSlots]=useState([]);
     let index=0;
     const handleClick=()=>{
         console.log(format(date,'PP'),specialist);
@@ -20,13 +20,16 @@ const AvailableAppointment = ({date,specialist,filter,userInfo}) => {
         .then(res=>res.json())
         .then(data=>{
             let filteredDoctor=[];
+            let filteredSlot=[];
             for(let i=0;i<data.length;++i){
                 for(let j=0;j<data[i].schedules.length;++j){
                     if(data[i].schedules[j].day===format(date,'PP')){
                         filteredDoctor.push(data[i]);
+                        filteredSlot.push(data[i].schedules[j]);
                     }
                 }
             }
+            setSlots(filteredSlot);
             setDoctors(filteredDoctor);
             setMessage(true);
         });
@@ -47,6 +50,7 @@ const AvailableAppointment = ({date,specialist,filter,userInfo}) => {
                 key={doctor._id}
                 doctor={doctor}
                 setBooking={setBooking}
+                slots={slots}
                 >
                 
                 </Doctors>)
@@ -56,7 +60,7 @@ const AvailableAppointment = ({date,specialist,filter,userInfo}) => {
           booking={booking}
           setBooking={setBooking}
           userInfo={userInfo}
-          
+          slots={slots}
           ></BookingModal>}
         </div>
     );

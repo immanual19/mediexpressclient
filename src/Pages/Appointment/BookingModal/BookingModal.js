@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import { setDefaultOptions } from 'date-fns/esm';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
-const BookingModal = ({date, booking, setBooking,userInfo,doctor}) => {
+const BookingModal = ({date, booking, setBooking,userInfo,doctor,slots}) => {
   const [user, loading,error]=useAuthState(auth);
   const { _id, name, schedules } = booking;
   console.log(schedules);
@@ -27,8 +27,10 @@ const BookingModal = ({date, booking, setBooking,userInfo,doctor}) => {
       gender:userInfo.gender,
       age:userInfo.age,
       phone:event.target.phone.value,
-      reason:event.target.reason.value
+      reason:event.target.reason.value,
+      bookingTime:new Date()
     }
+
     console.log("Booking info ",booking);
     fetch('http://localhost:8080/booking',{
       method: 'POST',
@@ -41,11 +43,23 @@ const BookingModal = ({date, booking, setBooking,userInfo,doctor}) => {
     .then(data=>{
       console.log(data);
       if(data.success){
-        toast(`Appointment is set, ${formattedDate} at ${slot}`);
+        fetch('http://localhost:8080/updatedata',{
+          method:'POST',
+          headers:{
+            'content-type':'application/json'
+          },
+          body:JSON.stringify({doctorId:_id,date:format(date,'PP'),slot:slot})
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          
+        })
+        toast('Appointment is set');
       }
       else{
-        toast.error(`Already have an appointment on ${data.booking?.date} at ${data.booking?.slot}`);
+        toast.error('Already have an appointment on selected date with this doctor');
       }
+      
       setBooking(null);
     })
     
@@ -61,8 +75,8 @@ const BookingModal = ({date, booking, setBooking,userInfo,doctor}) => {
             <select id="selectedSlot" class="select select-bordered w-full max-w-xs">
             <option disabled selected>Select your preferred time</option>
             {
-              schedules.map((slot, i) => <option
-                  value={slot.start}
+              slots.map((slot, i) => <option
+                  value={`${slot.start}+${slot.end}+${slot.slots}`}
                   key={i}
               >Start Time: {slot.start} End Time: {slot.end} Slots available: {slot.slots}</option>)
           }
