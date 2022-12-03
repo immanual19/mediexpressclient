@@ -11,7 +11,7 @@ const AdminUpdateProfile = ({userInfo}) => {
     const onSubmit=async(data)=>{
         userInfo.image=imageURL;
         console.log(userInfo);
-        fetch('http://localhost:8080/updateadmins',{
+        fetch('https://mediexpressserver.onrender.com/updateadmins',{
           method:'POST',
           headers:{
             'content-type':'application/json'

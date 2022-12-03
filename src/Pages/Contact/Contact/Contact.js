@@ -1,18 +1,35 @@
-import { React, useState } from 'react';
-import { toast } from 'react-toastify';
-import { useForm } from "react-hook-form";
+import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
-const Complaint = ({userInfo}) => {
+
+const Contact = () => {
     const [user, loading,error]=useAuthState(auth);
-    const [complaint,setComplaint]= useState("");
-    console.log(user);
+    const [info,setInfo]=useState(null);
     const [fError,setFError]=useState(false);
+    const [complaint,setComplaint]= useState("");
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const update=(event)=>{
         setComplaint(event.target.value);
         
     }
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    useEffect(()=>{
+        fetch('https://mediexpressserver.onrender.com/userinfo',{
+        method: 'POST',
+        headers:{
+          'content-type':'application/json'
+        },
+        body: JSON.stringify({email:user.email})
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        console.log(data);
+        setInfo(data);
+      })
+    },[user.email])
+
+
     const onSubmit=async(data)=>{
         
         if(complaint===""){
@@ -20,11 +37,11 @@ const Complaint = ({userInfo}) => {
         }
         else{
             data.name=user.displayName;
-            data.email=userInfo.email;
+            data.email=info.email;
             data.complaint=complaint;
             
             
-            fetch('https://mediexpressserver.onrender.com/complaint',{
+            fetch('https://mediexpressserver.onrender.com/contact',{
                 method: 'POST',
                 headers:{
                   'content-type':'application/json'
@@ -73,7 +90,7 @@ const Complaint = ({userInfo}) => {
 type="email"
 placeholder="Your Email"
 class="input input-bordered w-full max-w-xs"
-value={userInfo.email}
+value={user.email}
 disabled
 />
 <label class="label">
@@ -105,4 +122,4 @@ disabled
     );
 };
 
-export default Complaint;
+export default Contact;

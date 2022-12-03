@@ -15,7 +15,7 @@ const Navbar = () => {
         <li><Link to="/appointment">Appointment</Link></li>
         <li><Link to="/dashboard">Dashboard</Link></li>
         <li><Link to="/reviews">Reviews</Link></li>
-        <li><Link to="/reviews">Contact</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
         <li>{user?<button className='btn btn-ghost' onClick={logout}>Sign out</button>:<Link to="/login">Login</Link>}</li>
     </React.Fragment>
 

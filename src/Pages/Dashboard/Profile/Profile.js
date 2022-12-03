@@ -9,7 +9,7 @@ const Profile = ({userInfo}) => {
     const [info,setInfo]=useState(true);
     if(userInfo.role==='Doctor' && info){
         
-        fetch('http://localhost:8080/doctorinfo',{
+        fetch('https://mediexpressserver.onrender.com/doctorinfo',{
             method:'POST',
             headers:{
                 'content-type':'application/json'
@@ -30,7 +30,7 @@ const Profile = ({userInfo}) => {
     }
     else if(userInfo.role==='Patient' && info){
         
-        fetch('http://localhost:8080/patientinfo',{
+        fetch('https://mediexpressserver.onrender.com/patientinfo',{
             method:'POST',
             headers:{
                 'content-type':'application/json'
@@ -51,7 +51,7 @@ const Profile = ({userInfo}) => {
     }
     else if(userInfo.role==='Admin' && info){
        
-        fetch('http://localhost:8080/admininfo',{
+        fetch('https://mediexpressserver.onrender.com/admininfo',{
             method:'POST',
             headers:{
                 'content-type':'application/json'

@@ -11,6 +11,7 @@ import RequireAuth from './Pages/Login/RequireAuth';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
+import Contact from './Pages/Contact/Contact/Contact';
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
           <Dashboard />
           </RequireAuth>
           } />
+          <Route path="contact" element={
+            <RequireAuth>
+            <Contact />
+            </RequireAuth>
+            } />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
       </Routes>

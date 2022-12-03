@@ -38,7 +38,7 @@ const Dashboard = () => {
    const [sponsors,setSponsors]=useState(false);
    const [help,setHelp]=useState(false);
    useEffect(()=>{
-      fetch('http://localhost:8080/userinfo',{
+      fetch('https://mediexpressserver.onrender.com/userinfo',{
       method: 'POST',
       headers:{
         'content-type':'application/json'
