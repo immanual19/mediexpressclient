@@ -22,6 +22,8 @@ import Documentation from '../Documentation/Documentation';
 import Sponsors from '../Sponsors/Sponsors';
 import Help from '../Help/Help';
 const Dashboard = () => {
+
+
    const [user, loading,error]=useAuthState(auth);
    const [home,setHome]=useState(true);
    const [profile,setProfile]=useState(false);
@@ -37,6 +39,19 @@ const Dashboard = () => {
    const [documentation,setDocumentation]=useState(false);
    const [sponsors,setSponsors]=useState(false);
    const [help,setHelp]=useState(false);
+
+
+
+   
+
+
+   window.onload = function() {
+      if(!window.location.hash) {
+          window.location = window.location + '#loaded';
+          window.location.reload();
+      }
+  }
+
    useEffect(()=>{
       fetch('http://localhost:8080/userinfo',{
       method: 'POST',
