@@ -1,13 +1,16 @@
+import { format } from 'date-fns';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
+import auth from '../../../firebase.init';
 
 const BookedCard = ({booking}) => {
+    const [user, loading,error]=useAuthState(auth);
     const [activeLink,setActiveLink]=useState(false);
     const [link,setLink]=useState('');
     const sendLink=(id)=>{
         const link=`http://localhost:3000/room/${id}`;
-        
         setLink(link);
         console.log(link);
 
@@ -16,7 +19,7 @@ const BookedCard = ({booking}) => {
             headers:{
                 'content-type':'application/json'
             },
-            body:JSON.stringify({patientId:booking.patientId,url:link,activation:activeLink})
+            body:JSON.stringify({patientId:booking.patientId,url:link,activation:activeLink,date:format(new Date(),'PP'),reason:booking.reason,doctorName:user.displayName})
         })
         .then(res=>res.json())
         .then(data=>{
