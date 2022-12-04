@@ -47,7 +47,7 @@ const DoctorProfileUpdate = ({userInfo}) => {
         userInfo.schedules=schedules;
         userInfo.speciality=data.speciality;
         console.log(userInfo);
-        fetch('https://mediexpressserver.onrender.com/updatedoctors',{
+        fetch('http://localhost:8080/updatedoctors',{
           method:'POST',
           headers:{
             'content-type':'application/json'

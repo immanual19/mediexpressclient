@@ -11,7 +11,7 @@ const PatientUpdateProfile = ({userInfo}) => {
     const onSubmit=async(data)=>{
         userInfo.image=imageURL;
         console.log(userInfo);
-        fetch('https://mediexpressserver.onrender.com/updatepatients',{
+        fetch('http://localhost:8080/updatepatients',{
           method:'POST',
           headers:{
             'content-type':'application/json'

@@ -12,7 +12,7 @@ const UploadPrescriptionPatient = ({userInfo}) => {
     const onSubmit=async(data)=>{
         userInfo.reportname=data.reportname;
         userInfo.reportimage=imageURL;
-        fetch('https://mediexpressserver.onrender.com/pastmedicalhistory',{
+        fetch('http://localhost:8080/pastmedicalhistory',{
           method:'POST',
           headers:{
             'content-type':'application/json'

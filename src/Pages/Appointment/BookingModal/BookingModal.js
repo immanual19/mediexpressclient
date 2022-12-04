@@ -21,6 +21,7 @@ const BookingModal = ({date, booking, setBooking,userInfo,doctor,slots}) => {
     const booking={
       doctorId: _id,
       patientName: user.displayName,
+      patientId:userInfo._id,
       slot: slot,
       date: formattedDate,
       patientEmail:user.email,
@@ -32,7 +33,7 @@ const BookingModal = ({date, booking, setBooking,userInfo,doctor,slots}) => {
     }
 
     console.log("Booking info ",booking);
-    fetch('https://mediexpressserver.onrender.com/booking',{
+    fetch('http://localhost:8080/booking',{
       method: 'POST',
       headers:{
         'content-type':'application/json'
@@ -43,7 +44,7 @@ const BookingModal = ({date, booking, setBooking,userInfo,doctor,slots}) => {
     .then(data=>{
       console.log(data);
       if(data.success){
-        fetch('https://mediexpressserver.onrender.com/updatedata',{
+        fetch('http://localhost:8080/updatedata',{
           method:'POST',
           headers:{
             'content-type':'application/json'

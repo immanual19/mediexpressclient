@@ -24,7 +24,7 @@ const Complaint = ({userInfo}) => {
             data.complaint=complaint;
             
             
-            fetch('https://mediexpressserver.onrender.com/complaint',{
+            fetch('http://localhost:8080/complaint',{
                 method: 'POST',
                 headers:{
                   'content-type':'application/json'

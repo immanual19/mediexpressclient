@@ -1,6 +1,7 @@
 import React from 'react';
 import avatar1 from '../../../assets/images/avatar1.jpeg';
 const Doctors = ({doctor, setBooking}) => {
+  console.log(doctor);
     const {schedules}=doctor;
     return (
         <div>
@@ -9,10 +10,12 @@ const Doctors = ({doctor, setBooking}) => {
           <img src={doctor.image} alt="doctor" class="rounded-xl" />
         </figure>
         <div class="card-body items-center text-center">
-          <h2 class="card-title">{doctor.name}</h2>
-          <p>{doctor.qualification}</p>
-          <p>{doctor.designation}</p>
-          <p>{doctor.fees}</p>
+          <h2 class="card-title">Name: {doctor.name}</h2>
+          <p>Qualification: {doctor.qualification}</p>
+          <p>Designation: {doctor.designation}</p>
+          <p>Speciality: {doctor.speciality}</p>
+          <p>Designation: {doctor.workplace}</p>
+          <p>Fees: {doctor.fees}</p>
           <div class="card-actions">
             <label for="booking-modal"disabled={schedules.length===0} 
             onClick={()=>setBooking(doctor)}

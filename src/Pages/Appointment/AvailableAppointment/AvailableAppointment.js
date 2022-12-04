@@ -10,7 +10,7 @@ const AvailableAppointment = ({date,specialist,filter,userInfo}) => {
     let index=0;
     const handleClick=()=>{
         console.log(format(date,'PP'),specialist);
-        fetch('https://mediexpressserver.onrender.com/doctors',{
+        fetch('http://localhost:8080/doctors',{
             method:'POST',
             headers:{
                 'content-type':'application/json'

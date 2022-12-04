@@ -12,7 +12,7 @@ const Appointment = () => {
     const [filter,setFilter]=useState(false);
     const [userInfo,setUserInfo]=useState(null);
     useEffect(()=>{
-        fetch('https://mediexpressserver.onrender.com/userinfo',{
+        fetch('http://localhost:8080/userinfo',{
         method: 'POST',
         headers:{
           'content-type':'application/json'
