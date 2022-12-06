@@ -10,6 +10,7 @@ const ConsultationDoctor = ({userInfo}) => {
     const [user, loading,error]=useAuthState(auth);
     const [bookings,setBookings]=useState([]);
     const [doMapping,setDoMapping]=useState(false);
+    console.log(userInfo);
     useEffect(()=>{
         fetch('http://localhost:8080/mybookings',{
             method:'POST',
@@ -34,6 +35,7 @@ const ConsultationDoctor = ({userInfo}) => {
             doMapping && bookings.map(booking=><BookedCard
                 key={booking._id}
                 booking={booking}
+                userInfo={userInfo}
                 >
                 
                 </BookedCard>)

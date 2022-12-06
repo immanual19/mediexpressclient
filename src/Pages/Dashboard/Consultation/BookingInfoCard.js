@@ -10,6 +10,13 @@ const BookingInfoCard = ({singleData}) => {
         <div class="card-body items-center text-center">
           <h2 class="card-title">Appointment to : {singleData.doctorName}</h2>
           <p>Appointment for: {singleData.reason}</p>
+          <div class="rating">
+  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+</div>
           <div class="card-actions justify-end">
             <button class="btn btn-primary"
             onClick={handleJoin}

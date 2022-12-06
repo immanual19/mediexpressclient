@@ -32,7 +32,7 @@ const SignUp = () => {
       .then(res=>res.json())
       .then(data=>{
         if(data.success){
-          toast('Congratulations!!! Profile update has been successful.');
+          toast('Congratulations!!! SignUp is successful.');
         }
         else{
           toast.error('You already have a MediExpressAccount. Please login.');
@@ -51,7 +51,7 @@ const SignUp = () => {
         await createUserWithEmailAndPassword(data.email,data.password);
         await updateProfile({displayName:data.name});
         await updateUser(role,gender,data.email,data.age,data.phone,data.nid);
-        navigate('/appointment');
+        navigate('/');
         }
         else{
             setRoleError(true);

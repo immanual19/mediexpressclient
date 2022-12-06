@@ -10,14 +10,22 @@ const UploadPrescriptionPatient = ({userInfo}) => {
     const [imageURL,setImageURL]=useState(null);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit=async(data)=>{
-        userInfo.reportname=data.reportname;
-        userInfo.reportimage=imageURL;
+        let info={};
+        info.patientid=userInfo._id;
+        info.role=userInfo.role;
+        info.gender=userInfo.gender;
+        info.email=userInfo.email;
+        info.age=userInfo.age;
+        info.phone=userInfo.phone;
+        info.nid=userInfo.nid;
+        info.reportname=data.reportname;
+        info.reportimage=imageURL;
         fetch('http://localhost:8080/pastmedicalhistory',{
           method:'POST',
           headers:{
             'content-type':'application/json'
           },
-          body:JSON.stringify(userInfo)
+          body:JSON.stringify(info)
         })
         .then(res=>res.json())
         .then(data=>{

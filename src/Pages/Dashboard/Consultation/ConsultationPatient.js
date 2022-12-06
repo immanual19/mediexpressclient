@@ -17,6 +17,7 @@ const ConsultationPatient = ({userInfo}) => {
         })
         .then(res=>res.json())
     .then(data=>{
+        console.log("my data",data);
         setData(data);
         setLoading(true);
     })

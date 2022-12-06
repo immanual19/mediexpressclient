@@ -5,12 +5,15 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 
-const BookedCard = ({booking}) => {
+const BookedCard = ({booking,userInfo}) => {
     const [user, loading,error]=useAuthState(auth);
     const [activeLink,setActiveLink]=useState(false);
     const [link,setLink]=useState('');
     const sendLink=(id)=>{
-        const link=`http://localhost:3000/room/${id}`;
+        let link1=id.slice(0,7);
+        let link2=userInfo._id.slice(0,7);
+        let linkRoute=String(link1.concat(link2));
+        const link=`http://localhost:3000/room/${linkRoute}`;
         setLink(link);
         console.log(link);
 
@@ -19,7 +22,7 @@ const BookedCard = ({booking}) => {
             headers:{
                 'content-type':'application/json'
             },
-            body:JSON.stringify({patientId:booking.patientId,url:link,activation:activeLink,date:format(new Date(),'PP'),reason:booking.reason,doctorName:user.displayName})
+            body:JSON.stringify({patientId:booking.patientId,url:link,doctorId:userInfo._id,activation:activeLink,date:format(new Date(),'PP'),reason:booking.reason,doctorName:user.displayName})
         })
         .then(res=>res.json())
         .then(data=>{
@@ -35,8 +38,22 @@ const BookedCard = ({booking}) => {
         
     }
 
-    const handleJoining=()=>{
-        window.open(link);
+    const handleJoining=(id,reason)=>{
+        fetch('http://localhost:8080/getlink',{
+          method:'POST',
+          headers:{
+            'content-type':'application/json'
+          },
+          body:JSON.stringify({patientId:id,reason:reason})
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          if(data.success){
+            console.log(data.data.url);
+            window.open(data.data.url);
+          }
+        })
+       
     }
 
     return (
@@ -65,7 +82,9 @@ const BookedCard = ({booking}) => {
 
       
       
-      <button class="btn btn-primary" onClick={handleJoining}>Join</button>
+      <button class="btn btn-primary" onClick={()=>{
+        handleJoining(booking.patientId,booking.reason)
+      }}>Join</button>
     </div>
   </div>
 </div>
