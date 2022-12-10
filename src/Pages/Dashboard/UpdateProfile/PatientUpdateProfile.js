@@ -53,7 +53,7 @@ const PatientUpdateProfile = ({userInfo}) => {
     };
     return (
         <div className='mt-2 w-1/2 mx-auto text-center'>
-        <h1 className='text-primary'>Mr {user.displayName} are all set but uploading your profile picture</h1>
+        <h1 className='text-primary'>Dear, {user.displayName}. You are all set but uploading your profile picture</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className='my-5'>
             <button class="btn btn-active btn-primary mx-2">Select a profile picture</button>

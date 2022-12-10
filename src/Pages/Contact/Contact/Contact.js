@@ -64,7 +64,7 @@ const Contact = () => {
     return (
         <div className='mt-10 w-1/4 mx-auto text-center'>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <h1 className="text-center text-2xl font-bold">Your Complaints</h1>
+        <h1 className="text-center text-2xl font-bold">Your Queries</h1>
         <div class="form-control w-full max-w-xs">
   <label class="label">
     <span class="label-text">Full Name</span>

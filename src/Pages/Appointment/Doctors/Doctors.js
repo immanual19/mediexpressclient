@@ -14,7 +14,7 @@ const Doctors = ({doctor, setBooking}) => {
           <p>Qualification: {doctor.qualification}</p>
           <p>Designation: {doctor.designation}</p>
           <p>Speciality: {doctor.speciality}</p>
-          <p>Designation: {doctor.workplace}</p>
+          <p>Workplace: {doctor.workplace}</p>
           <p>Fees: {doctor.fees}</p>
           <div class="card-actions">
             <label for="booking-modal"disabled={schedules.length===0} 

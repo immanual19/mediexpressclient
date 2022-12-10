@@ -16,6 +16,7 @@
     "flowbite": "^1.5.4",
     "flowbite-react": "^0.3.5",
     "react": "^18.2.0",
+    "react-bkash": "^3.0.0",
     "react-chartjs-2": "^5.0.1",
     "react-day-picker": "^8.3.7",
     "react-dom": "^18.2.0",
