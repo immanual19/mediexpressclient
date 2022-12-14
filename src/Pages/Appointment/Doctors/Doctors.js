@@ -23,7 +23,8 @@ const Doctors = ({doctor, setBooking}) => {
           <p>Speciality: {doctor.speciality}</p>
           <p>Workplace: {doctor.workplace}</p>
           <p>Fees: {doctor.fees}</p>
-          <p>Rating: {sum/doctor.ratingInfo.length}/5</p>
+          <p>Total Rating: {doctor.ratingInfo.length}</p>
+          <p>Average Rating: {sum/doctor.ratingInfo.length}/5</p>
           <div class="card-actions">
             <label for="booking-modal"disabled={schedules.length===0} 
             onClick={()=>setBooking(doctor)}
