@@ -7,7 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 const BookingModal = ({date, booking, setBooking,userInfo,doctor,slots}) => {
   const [user, loading,error]=useAuthState(auth);
-  const { _id, name, schedules } = booking;
+  const { _id, name, schedules, fees } = booking;
   console.log(schedules);
   const formattedDate=format(date,'PP');
   const handleCancelling=()=>{
@@ -29,7 +29,10 @@ const BookingModal = ({date, booking, setBooking,userInfo,doctor,slots}) => {
       age:userInfo.age,
       phone:event.target.phone.value,
       reason:event.target.reason.value,
-      bookingTime:new Date()
+      bookingTime:new Date(),
+      doctorName:name,
+      fees:fees,
+      paymentStatus:false
     }
 
     console.log("Booking info ",booking);
@@ -55,7 +58,7 @@ const BookingModal = ({date, booking, setBooking,userInfo,doctor,slots}) => {
         .then(data=>{
           
         })
-        toast('Appointment is set');
+        toast('Appointment is booked. Please visit your Inbox inside Dashboard to make payment or see unpaid appointment list.');
       }
       else{
         toast.error('Already have an appointment on selected date with this doctor');
@@ -90,6 +93,7 @@ const BookingModal = ({date, booking, setBooking,userInfo,doctor,slots}) => {
             <input type="text" name="reason" placeholder="Type your reason here" class="input input-bordered w-full max-w-xs" />
             <div className='grid grid-cols-2 gap-2'>
             <input type="submit" value="Confirm" class="btn btn-secondary w-full max-w-xs" />
+            
             <input type="submit" value="Cancel" class="btn base-300 w-full max-w-xs" onClick={handleCancelling}/>
             </div>
             
