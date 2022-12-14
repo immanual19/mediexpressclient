@@ -26,7 +26,7 @@ const ConsultationPatient = ({userInfo}) => {
 
     return (
         <div className='mt-2 w-1/2 mx-auto text-center'>
-        <h1>Your today's appointment</h1>
+        <h1>Your today's appointment.</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8'>
         {
             loading && data.map(singleData=><BookingInfoCard
