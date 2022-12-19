@@ -53,7 +53,7 @@ const Dashboard = () => {
   }
 
    useEffect(()=>{
-      fetch('http://localhost:8080/userinfo',{
+      fetch('https://mediexpressserver.onrender.com/userinfo',{
       method: 'POST',
       headers:{
         'content-type':'application/json'

@@ -15,7 +15,7 @@ const BookingInfoCard = ({singleData}) => {
     }
     const handleRating=()=>{
       if(rating!==0){
-        fetch('http://localhost:8080/ratedoctor',{
+        fetch('https://mediexpressserver.onrender.com/ratedoctor',{
           method:'POST',
           headers:{
             'content-type':'application/json'

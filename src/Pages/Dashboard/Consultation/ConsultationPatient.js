@@ -8,7 +8,7 @@ const ConsultationPatient = ({userInfo}) => {
     const [data,setData]=useState([]);
     const [loading,setLoading]=useState(false);
     useEffect(()=>{
-        fetch('http://localhost:8080/joininfo',{
+        fetch('https://mediexpressserver.onrender.com/joininfo',{
             method:'POST',
             headers:{
                 'content-type':'application/json'

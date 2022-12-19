@@ -23,7 +23,7 @@ const PastHistory = ({ userInfo }) => {
     console.log(data.nid);
     console.log(reportname);
 
-    fetch('http://localhost:8080/showreports',{
+    fetch('https://mediexpressserver.onrender.com/showreports',{
         method:'POST',
         headers:{
             'content-type':'application/json'

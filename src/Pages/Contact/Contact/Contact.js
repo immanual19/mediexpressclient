@@ -15,7 +15,7 @@ const Contact = () => {
         
     }
     useEffect(()=>{
-        fetch('http://localhost:8080/userinfo',{
+        fetch('https://mediexpressserver.onrender.com/userinfo',{
         method: 'POST',
         headers:{
           'content-type':'application/json'
@@ -41,7 +41,7 @@ const Contact = () => {
             data.complaint=complaint;
             
             
-            fetch('http://localhost:8080/contact',{
+            fetch('https://mediexpressserver.onrender.com/contact',{
                 method: 'POST',
                 headers:{
                   'content-type':'application/json'

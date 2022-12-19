@@ -22,7 +22,7 @@ const SignUp = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const updateUser=(role,gender,email,age,phone,nid)=>{
       const userInfo={role:role,gender:gender,email:email,age:age,phone:phone,nid:nid};
-      fetch('http://localhost:8080/updateprofile',{
+      fetch('https://mediexpressserver.onrender.com/updateprofile',{
         method: 'POST',
         headers:{
           'content-type':'application/json'

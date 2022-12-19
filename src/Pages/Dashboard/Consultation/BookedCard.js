@@ -17,7 +17,7 @@ const BookedCard = ({booking,userInfo}) => {
         setLink(link);
         console.log(link);
 
-        fetch('http://localhost:8080/sendlink',{
+        fetch('https://mediexpressserver.onrender.com/sendlink',{
             method:'POST',
             headers:{
                 'content-type':'application/json'
@@ -39,7 +39,7 @@ const BookedCard = ({booking,userInfo}) => {
     }
 
     const handleJoining=(id,reason)=>{
-        fetch('http://localhost:8080/getlink',{
+        fetch('https://mediexpressserver.onrender.com/getlink',{
           method:'POST',
           headers:{
             'content-type':'application/json'

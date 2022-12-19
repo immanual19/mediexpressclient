@@ -9,7 +9,7 @@ const InboxPatient = ({userInfo}) => {
     const [bookingData,setBookingData]=useState([]);
     const [user, loading,error]=useAuthState(auth);
     useEffect(()=>{
-        fetch('http://localhost:8080/myappointmentlist',{
+        fetch('https://mediexpressserver.onrender.com/myappointmentlist',{
             method:'POST',
             headers:{
                 'content-type':'application/json'

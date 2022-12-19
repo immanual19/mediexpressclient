@@ -20,7 +20,7 @@ const UploadPrescriptionPatient = ({userInfo}) => {
         info.nid=userInfo.nid;
         info.reportname=data.reportname;
         info.reportimage=imageURL;
-        fetch('http://localhost:8080/pastmedicalhistory',{
+        fetch('https://mediexpressserver.onrender.com/pastmedicalhistory',{
           method:'POST',
           headers:{
             'content-type':'application/json'

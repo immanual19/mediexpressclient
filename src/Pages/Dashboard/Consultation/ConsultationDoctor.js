@@ -12,7 +12,7 @@ const ConsultationDoctor = ({userInfo}) => {
     const [doMapping,setDoMapping]=useState(false);
     console.log(userInfo);
     useEffect(()=>{
-        fetch('http://localhost:8080/mybookings',{
+        fetch('https://mediexpressserver.onrender.com/mybookings',{
             method:'POST',
             headers:{
                 'content-type':'application/json'
